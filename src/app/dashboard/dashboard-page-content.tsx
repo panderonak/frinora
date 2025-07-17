@@ -1,5 +1,6 @@
 'use client';
 
+import { DashboardEmptyState } from '@/app/dashboard/dashboard-empty-state';
 import { LoadingSpinner } from '@/components/loading-spinner';
 import { Modal } from '@/components/modal';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -46,7 +47,7 @@ export const DashboardPageContent = () => {
     );
   }
 
-  if (!categories || categories.length === 0) return <div>Empty</div>;
+  if (!categories || categories.length === 0) return <DashboardEmptyState />;
 
   return (
     <>
@@ -87,18 +88,7 @@ export const DashboardPageContent = () => {
 
               <div className="space-y-3 mb-6">
                 <div className="flex items-center text-sm/5 text-gray-600">
-                  <ClockIcon className="size-4 mr-2 text-brand-blue" />
-                  <span className="font-medium"> Last Ping</span>
-                  <span className="ml-1">
-                    {category.lastPing
-                      ? formatDistanceToNow(category.lastPing) + ' ago'
-                      : 'Never'}
-                  </span>
-                </div>
-              </div>
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm/5 text-gray-600">
-                  <ClockIcon className="size-4 mr-2 text-brand-blue" />
+                  <ClockIcon className="size-5 mr-2 text-brand-blue" />
                   <span className="font-medium">Last Ping</span>
                   <span className="ml-1">
                     {category.lastPing
@@ -122,7 +112,7 @@ export const DashboardPageContent = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-center mt-4">
+              <div className="flex items-center justify-between mt-4">
                 <Link
                   href={`/dashboard/category/${category.name}`}
                   className={buttonVariants({

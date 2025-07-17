@@ -22,7 +22,7 @@ const databaseMiddleware = j.middleware(async ({ c, next }) => {
   const { DATABASE_URL } = env(c);
 
   const sql = neon(DATABASE_URL);
-  const db = drizzle(sql, { schema, logger: true });
+  const db = drizzle(sql, { schema });
 
   return await next({ db });
 });

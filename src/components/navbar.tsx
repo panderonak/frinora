@@ -14,7 +14,6 @@ export const Navbar = async () => {
       <MaxWidthWrapper>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex z-40 font-semibold">
-            {/* Frinora */}
             <Icons.frinora className="w-20" />
           </Link>
 
@@ -65,7 +64,7 @@ export const Navbar = async () => {
                     variant: 'default',
                   })}
                 >
-                  Sign Up <ArrowRight className="size-4 ml-1.5" />
+                  Sign Up <ArrowRight className="size-4" />
                 </Link>
               </>
             )}
