@@ -7,15 +7,15 @@ import { notFound } from 'next/navigation';
 import { CategoryPageContent } from '@/app/dashboard/category/[name]/category-page-content';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     name: string | string[] | undefined;
-  };
+  }>;
 }
+
 const Page = async ({ params }: PageProps) => {
   const { name } = await params;
 
   if (typeof name !== 'string') return notFound();
-
   const auth = await currentUser();
 
   if (!auth) {
@@ -29,8 +29,8 @@ const Page = async ({ params }: PageProps) => {
   if (!user) return notFound();
 
   const category = await db.query.eventCategory.findFirst({
-    where: ({ name, userId }, { eq, and }) =>
-      and(eq(name, name), eq(userId, user.id)),
+    where: ({ name: categoryName, userId }, { eq, and }) =>
+      and(eq(categoryName, name), eq(userId, user.id)),
   });
 
   if (!category) notFound();
